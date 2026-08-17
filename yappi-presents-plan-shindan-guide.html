@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📘 使い方ガイド | 携帯プラン診断 2.0（やっぴ〜Presents）</title>
+<style>
+  :root{
+    --navy:#0B2545;
+    --blue:#1E5EFF;
+    --blue-light:#EAF1FF;
+    --blue-mid:#DCE9FF;
+    --sky:#F3F7FC;
+    --white:#FFFFFF;
+    --ink:#101828;
+    --sub:#5B6472;
+    --green:#0E9F6E;
+    --amber:#E8A400;
+    --line:#E2E9F5;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Zen Kaku Gothic New","Noto Sans JP",-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;
+    background:linear-gradient(180deg,var(--sky) 0%, #EDF3FC 100%);
+    color:var(--ink);
+    padding-bottom:60px;
+    line-height:1.7;
+  }
+  a{color:var(--blue);}
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px;}
+
+  header.hero{
+    background:linear-gradient(135deg,var(--navy) 0%, #123B7A 55%, var(--blue) 100%);
+    color:#fff;
+    padding:34px 18px 46px;
+    border-radius:0 0 28px 28px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; right:-60px; top:-60px;
+    width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);
+  }
+  .brand{
+    display:flex;align-items:center;gap:8px;
+    font-size:13px;letter-spacing:.06em;color:#BFD3FF;
+    font-weight:700;
+  }
+  .brand .dot{width:6px;height:6px;background:#7FB2FF;border-radius:50%;}
+  h1{font-size:24px;line-height:1.4;margin:10px 0 6px;font-weight:800;}
+  h1 span{color:#8FC1FF;}
+  .hero p{margin:0;color:#D9E6FF;font-size:14.5px;}
+  .ver-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-top:16px;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);
+    padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;
+  }
+  .try-btn{
+    display:inline-block;margin-top:18px;
+    background:#fff;color:var(--blue);
+    font-weight:800;font-size:13.5px;
+    padding:11px 18px;border-radius:999px;text-decoration:none;
+  }
+
+  .card{
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:22px 20px;
+    margin-top:18px;
+    box-shadow:0 6px 20px rgba(16,24,40,.06);
+    border:1px solid var(--line);
+  }
+  .card h2{font-size:17px;margin:0 0 14px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px;}
+  .card p{font-size:14px;color:var(--ink);margin:0 0 10px;}
+  .card p:last-child{margin-bottom:0;}
+
+  .toc{display:flex;flex-direction:column;gap:8px;}
+  .toc a{
+    display:flex;align-items:center;gap:10px;
+    background:var(--sky);border:1px solid var(--line);border-radius:12px;
+    padding:11px 14px;font-size:13.5px;font-weight:700;color:var(--navy);
+    text-decoration:none;
+  }
+  .toc a .n{
+    width:22px;height:22px;border-radius:7px;background:var(--blue);color:#fff;
+    font-size:11.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+
+  .step{
+    display:flex;gap:14px;margin-bottom:20px;
+  }
+  .step:last-child{margin-bottom:0;}
+  .step-num{
+    width:32px;height:32px;border-radius:10px;background:var(--blue);
+    color:#fff;font-size:14px;font-weight:800;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 3px 10px rgba(30,94,255,.3);
+  }
+  .step-body h3{font-size:14.5px;margin:2px 0 6px;font-weight:800;color:var(--navy);}
+  .step-body p{font-size:13.5px;color:var(--sub);margin:0;}
+  .shot{
+    margin-top:10px;background:var(--sky);border:1px dashed var(--line);
+    border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--sub);
+  }
+
+  .qbox{
+    background:var(--blue-light);border-radius:12px;padding:14px 16px;margin-top:14px;
+    font-size:13px;color:var(--navy);
+  }
+  .qbox b{font-weight:800;}
+
+  table.mini{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px;}
+  table.mini th, table.mini td{border-bottom:1px solid var(--line);padding:9px 6px;text-align:left;}
+  table.mini th{color:var(--sub);font-weight:700;font-size:12px;}
+  table.mini td{color:var(--ink);}
+
+  .faq-item{border-bottom:1px solid var(--line);padding:14px 0;}
+  .faq-item:last-child{border-bottom:none;padding-bottom:0;}
+  .faq-q{font-size:14px;font-weight:800;color:var(--navy);display:flex;gap:8px;margin-bottom:6px;}
+  .faq-a{font-size:13.5px;color:var(--sub);margin:0;padding-left:24px;}
+
+  .line-cta{
+    display:block;text-align:center;text-decoration:none;
+    background:#06C755;color:#fff;font-weight:800;font-size:14px;
+    padding:14px;border-radius:14px;margin-top:20px;
+  }
+  .line-cta small{display:block;font-weight:600;font-size:11px;opacity:.9;margin-top:2px;}
+
+  footer{text-align:center;font-size:11px;color:var(--sub);margin-top:26px;}
+  footer .fbrand{font-weight:800;color:var(--navy);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>やっぴ〜Presents</div>
+    <h1>📘 使い方ガイド<span><br>携帯プラン診断 2.0</span></h1>
+    <p>むずかしい用語はナシ！絵文字を見ながら誰でも3分で診断できるように解説します📱✨</p>
+    <div class="ver-badge">🔰 初心者向け・完全ガイド</div><br>
+    <a class="try-btn" href="https://yappi7000.github.io/Keitai-Plan-shindan/" target="_blank" rel="noopener">🔍 診断アプリをひらく</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- もくじ -->
+  <div class="card">
+    <h2>🗺️ もくじ</h2>
+    <div class="toc">
+      <a href="#about"><span class="n">1</span>このアプリでできること</a>
+      <a href="#check"><span class="n">2</span>診断前にやること（データ量の確認）</a>
+      <a href="#step1"><span class="n">3</span>STEP1：毎月の使用状況を入れる</a>
+      <a href="#step2"><span class="n">4</span>STEP2：比較するキャリアを選ぶ</a>
+      <a href="#step3"><span class="n">5</span>STEP3：キャッシュバックを入れる（任意）</a>
+      <a href="#result"><span class="n">6</span>診断結果の見方</a>
+      <a href="#faq"><span class="n">7</span>よくある質問</a>
+    </div>
+  </div>
+
+  <!-- 1. できること -->
+  <div class="card" id="about">
+    <h2>1️⃣ このアプリでできること</h2>
+    <p>📱 <b>「携帯プラン診断 2.0」</b>は、今あなたが使っているスマホの使用状況（データ量・通話時間など）を入力するだけで、<b>一番お得な乗り換え先プラン</b>を自動で見つけてくれるツールです。</p>
+    <p>💰 さらに、MNP乗り換えでもらえる<b>キャッシュバック</b>を考慮した「実質いくら得か」まで計算してくれるのが特徴です👏</p>
+    <p>⏱️ 入力から診断結果が出るまで、だいたい<b>3分</b>あればOKです！</p>
+  </div>
+
+  <!-- 2. 事前確認 -->
+  <div class="card" id="check">
+    <h2>2️⃣ 診断前にやること</h2>
+    <p>まず、今のスマホで「毎月どれくらいデータを使っているか」を確認しましょう📶<br>わからなくても大丈夫、下の方法ですぐ調べられます👇</p>
+
+    <div class="step">
+      <div class="step-num">🍎</div>
+      <div class="step-body">
+        <h3>iPhoneの場合</h3>
+        <p>「設定」→「モバイル通信」→ 下にスクロールして「現在の期間」の数字を見る<br>※月初に「統計情報をリセット」を押さないと数字が貯まり続けるので注意⚠️</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">🤖</div>
+      <div class="step-body">
+        <h3>Androidの場合</h3>
+        <p>「設定」→「ネットワークとインターネット」→「データ使用量」で当月分を確認</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">📲</div>
+      <div class="step-body">
+        <h3>キャリアアプリ（一番正確）</h3>
+        <p>My docomo／My au／My SoftBank／my楽天モバイルなど、契約中のキャリアアプリにログインすると、正確な使用量と契約プラン名が確認できます</p>
+      </div>
+    </div>
+
+    <div class="qbox">
+      💡 <b>目安がわからない人へ：</b><br>
+      Wi-Fi中心の生活 → <b>3〜5GB</b><br>
+      外出先でもよく使う → <b>10〜20GB</b><br>
+      動画やテザリングが多い → <b>30GB以上</b>
+    </div>
+  </div>
+
+  <!-- STEP1 -->
+  <div class="card" id="step1">
+    <h2>3️⃣ STEP1：毎月の使用状況を入れる</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>📶 月のデータ使用量</h3>
+        <p>スライダーを左右に動かして、さっき確認したデータ量に合わせます（3GB／10GB／20GB／30GB／無制限から選択）</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>📞 月の通話時間・⏱ 1回の通話の長さ</h3>
+        <p>だいたいの通話時間と、1回あたり何分くらい話すかをボタンで選びます。「ほぼ電話しない」〜「よく通話する」の4段階です</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>👨‍👩‍👧 家族で同じキャリアにする人数</h3>
+        <p>家族みんなで同じキャリアにまとめる予定があれば人数を選択。家族割が使えるプランは自動で割引後の料金になります👪</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>📡 現在契約中のキャリア・プラン</h3>
+        <p>今契約している会社を選ぶと、プラン名の一覧が出てきます。プランを選ぶと<b>月額料金が自動で入力</b>されます✨<br>プランがわからない場合は「その他・不明」を選んで、月額料金だけ手入力でもOKです💴</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP2 -->
+  <div class="card" id="step2">
+    <h2>4️⃣ STEP2：比較するキャリアを選ぶ</h2>
+    <p>3つのグループからチェックを入れます（最初は全部チェック済みなので、そのままでもOK👌）</p>
+    <table class="mini">
+      <tr><th>グループ</th><th>特徴</th></tr>
+      <tr><td>🏢 大手キャリア</td><td>ドコモ・au・SoftBank。品質・サポート重視で月額は高め</td></tr>
+      <tr><td>⚡ サブブランド</td><td>ahamo/povo/LINEMO/UQ/Y!mobile。品質と価格のバランス型</td></tr>
+      <tr><td>💸 格安SIM</td><td>楽天モバイル/IIJmio/mineo。最安クラス</td></tr>
+    </table>
+    <p style="margin-top:10px;">こだわりがなければ<b>全部チェックしたまま</b>にしておくと、一番安い候補が自動で出てきます👍</p>
+  </div>
+
+  <!-- STEP3 -->
+  <div class="card" id="step3">
+    <h2>5️⃣ STEP3：キャッシュバックを入れる（任意・やっぴ〜おすすめ）</h2>
+    <p>🎁 MNP乗り換えの案件で「〇万円キャッシュバック」のような特典がある場合、ここでスイッチをONにして金額を入力すると、1年間で実質いくら安くなるかまで計算してくれます。</p>
+    <p>案件が決まっていない場合はOFFのままでOKです。当LINEでもお得な案件を配信しているので、迷ったら覗いてみてください👇</p>
+  </div>
+
+  <!-- 結果の見方 -->
+  <div class="card" id="result">
+    <h2>6️⃣ 診断結果の見方</h2>
+
+    <div class="step">
+      <div class="step-num">💚</div>
+      <div class="step-body">
+        <h3>年間節約額バナー</h3>
+        <p>一番上の緑のバナーに「年間いくら得するか」が大きく表示されます。今の月額料金を入力していると「現在のプラン→おすすめプラン」の比較まで見えます</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">📋</div>
+      <div class="step-body">
+        <h3>現在契約中のプランカード</h3>
+        <p>点線で囲まれたカードに、あなたが選んだ「今のキャリア・プラン・月額」が表示されます</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">🥇🥈🥉</div>
+      <div class="step-body">
+        <h3>おすすめプランランキング</h3>
+        <p>あなたの使用状況に合った上位3プランが順位付きで表示されます。プラン名・月額・家族割や通話オプションの有無まで一目でわかります</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">🎁</div>
+      <div class="step-body">
+        <h3>LINE公式ボタン</h3>
+        <p>結果画面の一番下にあるボタンから、やっぴ〜のLINE公式アカウントへ移動できます。診断結果のスクリーンショットを送ってもらえれば、個別に相談にものれます📩</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="card" id="faq">
+    <h2>7️⃣ よくある質問</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">❓ データ使用量がよくわかりません</div>
+      <p class="faq-a">アプリ内の「📊 月のデータ使用量の確認方法」を開くと、iPhone/Android/キャリアアプリでの確認手順が見られます。わからなければ「10GB」を選んで一旦診断してみてもOKです。</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">❓ 今のプランが選択肢に見つかりません</div>
+      <p class="faq-a">「現在契約中のキャリア」で「その他・不明」を選び、月額料金だけ手入力すれば診断できます。プランの調べ方は「📇 契約中の会社・プラン・料金の確認方法」を参考にしてください。</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">❓ 診断結果は本当にその料金になりますか？</div>
+      <p class="faq-a">掲載料金は公式サイトを参考にした目安です。キャンペーンやセット割の条件は人によって異なるため、契約前に必ず各キャリアの公式サイトで最新情報をご確認ください。</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">❓ 何度でも診断し直せますか？</div>
+      <p class="faq-a">はい、何度でも自由に条件を変えて再診断できます。家族の人数やキャッシュバック額を変えて比較してみるのもおすすめです🔁</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">❓ 乗り換えの相談もできますか？</div>
+      <p class="faq-a">もちろんです！診断結果のスクリーンショットをやっぴ〜のLINE公式に送っていただければ、あなたに合った案件やタイミングを個別にご案内します😊</p>
+    </div>
+  </div>
+
+  <a class="line-cta" href="https://lin.ee/AsTWK4D" target="_blank" rel="noopener">🎁 やっぴ〜LINEで個別相談・お得な案件をもらう
+    <small>診断結果のスクショを送るだけでOK！</small>
+  </a>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand">やっぴ〜Presents</div>
+    通信費のムダをゼロに。あなたの乗り換えを本気でサポートします📱
+  </div>
+</footer>
+
+</body>
+</html>
