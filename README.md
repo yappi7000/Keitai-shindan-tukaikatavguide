@@ -1,0 +1,1 @@
+# Keitai-shindan-tukaikatavguide
